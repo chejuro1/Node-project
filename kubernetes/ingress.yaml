@@ -11,10 +11,10 @@ spec:
   rules:
   - http:
       paths:
-      - path: /customers
+      - path: /
         backend:
           service:
-            name: customer-service
+            name: frontend
             port:
               number: 3000
         pathType: Exact
