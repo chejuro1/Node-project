@@ -13,7 +13,7 @@ variables:
   azureserviceconnection: ''
   imageRepository: 'acr'
   containerRegistry: '211125318888.dkr.ecr.us-east-1.amazonaws.com'
-  dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
+  dockerfilePath: '$(Build.SourcesDirectory)/dockerfile'
   AWS_REGION: 'us-east-1'
   
   tag: '$(Build.BuildId)'
