@@ -22,32 +22,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: customer-service
+  name: frontend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: customer-service
+      app: frontend
   template:
     metadata:
       labels:
-        app: customer-service
+        app: frontend
     spec:
       containers:
-        - name: customer-service
-          image: 957355528286.dkr.ecr.us-east-1.amazonaws.com/acr:latest
+        - name: frontend
+          image: 211125318888.dkr.ecr.us-east-1.amazonaws.com/nodejs:latest
           ports:
-            - containerPort: 5000
-          env:
-            - name: MONGODB_URI
-              valueFrom:
-                configMapKeyRef:
-                  name: mongo-config
-                  key: MONGODBURI
-            - name: MONGODB
-              valueFrom:
-                configMapKeyRef:
-                  name: mongo-config
-                  key: MONGODBDATABASE
+            - containerPort: 3000
+         
              
       
