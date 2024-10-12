@@ -24,9 +24,9 @@
                     body: JSON.stringify(customer)
                 });
 
-                if (!response.ok) {
+                <!-- if (!response.ok) {
                     throw new Error('Failed to add customer');
-                }
+                } -->
 
                 const result = await response.json();
                 alert('Customer added: ' + JSON.stringify(result));
