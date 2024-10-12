@@ -16,7 +16,7 @@
             };
 
             try {
-                const response =  fetch('http://k8s-default-customer-f811c6a467-1001386923.us-east-1.elb.amazonaws.com/customers', {
+                const response = await fetch('http://k8s-default-customer-f811c6a467-1001386923.us-east-1.elb.amazonaws.com/customers', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json',
                                 'X-Content-Type-Options': 'no-sniff'
@@ -24,9 +24,9 @@
                     body: JSON.stringify(customer)
                 });
 
-                <!-- if (!response.ok) {
+                if (!response.ok) {
                     throw new Error('Failed to add customer');
-                } -->
+                }
 
                 const result = await response.json();
                 alert('Customer added: ' + JSON.stringify(result));
