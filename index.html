@@ -18,7 +18,9 @@
             try {
                 const response =  fetch('http://k8s-default-customer-f811c6a467-1001386923.us-east-1.elb.amazonaws.com/customers', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: { 'Content-Type': 'application/json',
+                                'X-Content-Type-Options': 'no-sniff'
+                             },
                     body: JSON.stringify(customer)
                 });
 
@@ -40,11 +42,7 @@
             try {
                 const response = await fetch('http://k8s-default-customer-f811c6a467-1001386923.us-east-1.elb.amazonaws.com/customers', {
                     method: 'GET',
-                    headers: { 'Content-Type': 'application/json',
-                               'X-Content-Type-Options': 'no-sniff'
-                                
-
-                            }
+                    headers: { 'Content-Type': 'application/json' }
                     
                 });
 
@@ -57,7 +55,7 @@
                 // Display customers in the table
                 const customerTable = document.getElementById('customers-table-body');
                 customerTable.innerHTML = ''; // Clear previous table data
-
+               
                 customers.forEach(customer => {
                     const row = document.createElement('tr');
 
