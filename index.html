@@ -8,48 +8,78 @@
         // Function to handle POST request for adding a customer
         async function addCustomer(event) {
             event.preventDefault();
+
             const customer = {
                 id: document.getElementById('id').value,
                 name: document.getElementById('name').value,
                 email: document.getElementById('email').value
             };
 
-            const response = await fetch('http://k8s-default-customer-30000df441-893273878.us-east-1.elb.amazonaws.com/customers', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(customer)
-            });
-            
-            const result = await response.json();
-            alert('Customer added: ' + JSON.stringify(result));
+            try {
+                const response =  fetch('http://k8s-default-customer-dffcb798d1-1634271102.us-east-1.elb.amazonaws.com/customers', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(customer)
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to add customer');
+                }
+
+                const result = await response.json();
+                alert('Customer added: ' + JSON.stringify(result));
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
         }
 
         // Function to handle GET request to fetch all customers
         async function getCustomers(event) {
             event.preventDefault();
-            const response = await fetch('http://k8s-default-customer-30000df441-893273878.us-east-1.elb.amazonaws.com/customers', {
-                method: 'GET',
-                headers: { 'Content-Type': 'application/json' }
-            });
-            
-            const customers = await response.json();
 
-            // Display customers in the "customers-list" div
-            const customersList = document.getElementById('customers-list');
-            customersList.innerHTML = '';
+            try {
+                const response = await fetch('http://k8s-default-customer-dffcb798d1-1634271102.us-east-1.elb.amazonaws.com/customers', {
+                    method: 'GET',
+                    headers: { 'Content-Type': 'application/json' }
+                });
 
-            customers.forEach(customer => {
-                const customerItem = document.createElement('p');
-                customerItem.textContent = `ID: ${customer.id}, Name: ${customer.name}, Email: ${customer.email}`;
-                customersList.appendChild(customerItem);
-            });
+                if (!response.ok) {
+                    throw new Error('Failed to fetch customers');
+                }
+
+                const customers = await response.json();
+
+                // Display customers in the table
+                const customerTable = document.getElementById('customers-table-body');
+                customerTable.innerHTML = ''; // Clear previous table data
+
+                customers.forEach(customer => {
+                    const row = document.createElement('tr');
+
+                    const idCell = document.createElement('td');
+                    idCell.textContent = customer.id;
+                    row.appendChild(idCell);
+
+                    const nameCell = document.createElement('td');
+                    nameCell.textContent = customer.name;
+                    row.appendChild(nameCell);
+
+                    const emailCell = document.createElement('td');
+                    emailCell.textContent = customer.email;
+                    row.appendChild(emailCell);
+
+                    customerTable.appendChild(row);
+                });
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
         }
     </script>
 </head>
 <body>
     <h1>Customer API</h1>
-
-    <!-- Section to add a customer -->
+    
+    <!-- Form to add a customer -->
     <form onsubmit="addCustomer(event)">
         <h2>Add a Customer</h2>
         <label for="id">ID:</label>
@@ -64,11 +94,24 @@
         <button type="submit">Add Customer</button>
     </form>
 
-    <!-- Section to fetch and display the list of customers -->
+    <hr>
+
+    <!-- Button to fetch customers -->
     <h2>Customer List</h2>
     <button onclick="getCustomers(event)">Get Customers</button>
 
-    <!-- Div to display the list of customers -->
-    <div id="customers-list"></div>
+    <!-- Table to display customers -->
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody id="customers-table-body">
+            <!-- Rows will be inserted here -->
+        </tbody>
+    </table>
 </body>
 </html>
