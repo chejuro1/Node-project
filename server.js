@@ -4,7 +4,7 @@ const app = express();
 
 // Serve the HTML file
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index1.html'));  // Assumes your HTML file is named index.html
+  res.sendFile(path.join(__dirname, 'index.html'));  // Assumes your HTML file is named index.html
 });
 
 // Set up the server to listen on port 3000
