@@ -5,36 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customer API</title>
     <script>
-        // Function to handle POST request for adding a customer
-        async function addCustomer(event) {
-            event.preventDefault();
+          // Function to handle POST request for adding a customer
+    async function addCustomer(event) {
+    event.preventDefault();
 
-            const customer = {
-                id: document.getElementById('id').value,
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value
-            };
+    const customer = {
+        id: document.getElementById('id').value,
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value
+    };
 
-            try {
-                const response = await fetch('http://k8s-default-customer-f811c6a467-1001386923.us-east-1.elb.amazonaws.com/customers', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json',
-                                'X-Content-Type-Options': 'no-sniff'
-                             },
-                    body: JSON.stringify(customer)
-                });
+    try {
+        const response = await fetch('http://k8s-default-customer-f811c6a467-1001386923.us-east-1.elb.amazonaws.com/customers', {
+            method: 'POST',
+            headers: { 
+                'Content-Type': 'application/json',
+                'X-Content-Type-Options': 'no-sniff'
+            },
+            body: JSON.stringify(customer)
+        });
 
-                if (!response.ok) {
-                    throw new Error('Failed to add customer');
-                }
-
-                const result = await response.json();
-                alert('Customer added: ' + JSON.stringify(result));
-            } catch (error) {
-                alert('Error: ' + error.message);
-            }
+        if (!response.ok) {
+            throw new Error('Failed to add customer');
         }
 
+        const result = await response.json();
+        alert('Customer added: ' + JSON.stringify(result));
+
+        // Clear form fields after successful addition
+        document.getElementById('id').value = '';
+        document.getElementById('name').value = '';
+        document.getElementById('email').value = '';
+
+    } catch (error) {
+        alert('Error: ' + error.message);
+    }
+}
         // Function to handle GET request to fetch all customers
 async function getCustomers(event) {
     event.preventDefault();
