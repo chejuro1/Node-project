@@ -40,7 +40,12 @@
             try {
                 const response = await fetch('http://k8s-default-customer-f811c6a467-1001386923.us-east-1.elb.amazonaws.com/customers', {
                     method: 'GET',
-                    headers: { 'Content-Type': 'application/json' }
+                    headers: { 'Content-Type': 'application/json',
+                               'X-Content-Type-Options': 'no-sniff'
+                                
+
+                            }
+                    
                 });
 
                 if (!response.ok) {
