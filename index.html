@@ -87,14 +87,17 @@
     <!-- Form to add a customer -->
     <form onsubmit="addCustomer(event)">
         <h2>Add a Customer</h2>
+        <label for="id">ID:</label>
+        <input type="text" id="id" name="id" autocomplete="off" required><br><br>
+
         <label for="firstName">First Name:</label>
-        <input name="firstName" id="firstName" type="text" autocomplete="given-name" />
+        <input name="firstName" id="firstName" type="text" autocomplete="given-name" /><br><br>
 
         <label for="lastName">Last Name:</label>
-        <input name="lastName" id="lastName" type="text" autocomplete="family-name" />
+        <input name="lastName" id="lastName" type="text" autocomplete="family-name" /><br><br>
 
         <label for="email">Email:</label>
-        <input name="email" id="email" type="email" autocomplete="off" />
+        <input name="email" id="email" type="email" autocomplete="off" /><br><br>
         <button type="submit">Add Customer</button>
     </form>
 
