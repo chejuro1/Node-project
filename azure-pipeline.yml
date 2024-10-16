@@ -42,14 +42,14 @@ stages:
     #     tags: |
     #       $(tag)
     ########AWS      ###############################################
-    - task: SonarQubePrepare@6
-      inputs:
-       SonarQube: 'Sonar'
-       scannerMode: 'CLI'
-       configMode: 'manual'
-       cliProjectKey: 'chejuro'
-       cliProjectName: 'chejuro'
-       cliSources: '$(Build.SourcesDirectory)'
+    # - task: SonarQubePrepare@6
+    #   inputs:
+    #    SonarQube: 'Sonar'
+    #    scannerMode: 'CLI'
+    #    configMode: 'manual'
+    #    cliProjectKey: 'chejuro'
+    #    cliProjectName: 'chejuro'
+    #    cliSources: '$(Build.SourcesDirectory)'
 
     - task: Docker@2
       displayName: Build an image
