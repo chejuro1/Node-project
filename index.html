@@ -16,7 +16,7 @@
     };
 
     try {
-        const response = await fetch('http://k8s-default-customer-f811c6a467-1001386923.us-east-1.elb.amazonaws.com/customers', {
+        const response = await fetch('http://k8s-default-customer-7c0f30f55f-1686495003.us-east-1.elb.amazonaws.com/customers', {
             method: 'POST',
             headers: { 
                 'Content-Type': 'application/json',
@@ -46,7 +46,7 @@ async function getCustomers(event) {
     event.preventDefault();
 
     try {
-        const response = await fetch('http://k8s-default-customer-f811c6a467-1001386923.us-east-1.elb.amazonaws.com/customers', {
+        const response = await fetch('k8s-default-customer-7c0f30f55f-1686495003.us-east-1.elb.amazonaws.com/customers', {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' }
         });
